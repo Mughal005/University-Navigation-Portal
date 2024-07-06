@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>HOME</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Fasthand&family=Lobster&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Add basic styling for the loading spinner */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #1E90FF;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDkeOrHnDu05UGaqJ7TAluUF-M2XJsNa3w",
+            authDomain: "universitynavigationport-cf6a6.firebaseapp.com",
+            projectId: "universitynavigationport-cf6a6",
+            storageBucket: "universitynavigationport-cf6a6.appspot.com",
+            messagingSenderId: "724245839000",
+            appId: "1:724245839000:web:2e74b94417d8f3fac5a4ed"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+
+        // Function to fetch and display universities
+        function fetchUniversities() {
+            // Show loading spinner
+            document.getElementById('loading').style.display = 'flex';
+
+            db.collection("universities").get().then((querySnapshot) => {
+                setTimeout(function () {
+                    document.getElementById('loading').style.display = 'none';
+                }, 3000);
+                querySnapshot.forEach((doc) => {
+                    const universityData = doc.data();
+                    const universityDiv = document.createElement('div');
+                    universityDiv.className = 'box zone';
+                    universityDiv.innerHTML = `
+                        <a href="edit-University.html?docId=${doc.id}">
+                            <img src="${universityData.imageUrl}" alt="${universityData.universityName}">
+                        </a>
+                    `;
+                    document.querySelector('.grid-wrapper').appendChild(universityDiv);
+                });
+            }).catch((error) => {
+                document.getElementById('loading').style.display = 'none';
+                console.error("Error fetching universities: ", error);
+            });
+        }
+
+        // Function to sign out the user
+        function signOut() {
+            auth.signOut().then(() => {
+                console.log('User signed out');
+                showAlertWithNav('Admin Signout Successfully!');
+            }).catch((error) => {
+                console.error('Error signing out:', error);
+            });
+        }
+
+        function showAlertWithNav(text) {
+            Swal.fire({
+                title: text,
+                showClass: {
+                    popup: `
+                        animate__animated
+                        animate__fadeInUp
+                        animate__faster
+                    `
+                },
+                hideClass: {
+                    popup: `
+                        animate__animated
+                        animate__fadeOutDown
+                        animate__faster
+                    `
+                },
+                confirmButtonColor: '#1E90FF',
+                customClass: {
+                    title: 'alertClass',
+                    popup: 'alertClassPopup'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.replace('index.html');
+                }
+            });
+        }
+
+        // Call fetchUniversities on page load
+        window.onload = fetchUniversities;
+    </script>
+</head>
+
+<body>
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <div class="container zone">
+        <div class="text">
+            <h1>UNIVERSITY <span class="navigation">NAVIGATION</span> PORTAL</h1>
+            <p>FIND BEST <span class="universities">UNIVERSITIES</span> ACROSS PUNJAB</p>
+            <!-- Add the buttons here -->
+            <button onclick="window.location.href='add-university.html'" class="btn-add">Add University</button>
+            <button onclick="signOut()" class="btn-signout">Sign Out</button>
+        </div>
+        <img class="cover" src="./img/background.jpg" alt="Cover">
+    </div>
+    <div class="zone blue grid-wrapper">
+        <!-- University images will be appended here -->
+    </div>
+    <footer>
+        <p>&copy; 2024 University Navigation Portal, All rights reserved.</p>
+    </footer>
+
+    <style>
+        .btn-add,
+        .btn-signout {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #1E90FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        .btn-add:hover,
+        .btn-signout:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #1E90FF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-top: 10px;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</body>
+
+</html>

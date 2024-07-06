@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEC - TYPES</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fasthand&amp;family=Lobster&amp;display=swap" rel="stylesheet">
+    <style>
+        /* Main Container Styling */
+        .container {
+            margin-top: 20px;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Zone Styling */
+        .zone {
+            cursor: pointer;
+            color: #fff;
+            font-size: 2.3em;
+            border-radius: 4px;
+            border: 1px solid #bbb;
+            transition: all 0.3s linear;
+        }
+
+        .zone:hover {
+            -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px, inset rgba(0, 0, 0, 0.15) 0px -10px 20px;
+            -moz-box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px, inset rgba(0, 0, 0, 0.15) 0px -10px 20px;
+            -o-box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px, inset rgba(0, 0, 0, 0.15) 0px -10px 20px;
+            box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px, inset rgba(0, 0, 0, 0.15) 0px -10px 20px;
+        }
+
+        /* Navbar Styling */
+        .main-nav {
+            display: flex;
+            list-style: none;
+            font-size: 0.7em;
+            margin: 0;
+        }
+
+        .main-nav li {
+            padding: 20px;
+        }
+
+        .main-nav li a {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: black;
+        }
+
+        .main-nav li a:hover {
+            font-weight: bolder;
+            text-decoration: none;
+        }
+
+        .push {
+            margin-left: auto;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            border-radius: 50%;
+            width: 150px;
+            /* Adjust the size as needed */
+            height: 150px;
+            /* Adjust the size as needed */
+            object-fit: cover;
+            border: 2px solid #ccc;
+            /* Optional: Add a border */
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+
+        .text-color-footer {
+            color: white;
+        }
+
+        /* Header Styling */
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Section Headers */
+        h2 {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Paragraph Styling */
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        /* List Styling */
+        ul {
+            padding-left: 20px;
+        }
+
+        ul li {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Hostel and Location Styling */
+        .hostel {
+            font-weight: bold;
+        }
+
+        .transport {
+            font-weight: bold;
+        }
+
+        .ranking {
+            font-weight: bold;
+        }
+
+        /* Responsive Styling */
+        @media screen and (max-width: 767px) {
+
+            h1,
+            h2 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            .contact-info {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="zone green">
+        <ul class="main-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="HEC-TYPES.html">HEC Types</a></li>
+            <li><a href="AboutUs.html">About Us</a></li>
+            <li><a href="">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <img src="./data/logos/Beaconhouse-National-University-Logo-300x300.png" class="logo"
+                        alt="University Logo">
+                </div>
+                <h1>Beconhouse National University</h1>
+
+                <!-- History Section -->
+                <h2><i class="fa fa-history"></i> History</h2>
+                <p>Established: 2003</p>
+                <p>Recognized: Higher Education Commission, Pakistan</p>
+                <p>Control Type: Private</p>
+
+                <!-- department and their sub-department-->
+                <h2><i class="fa fa-graduation-cap"></i> Study Programs</h2>
+                <ul>
+                    <li>School of Education</li>
+                    <li>Institute of Psychology</li>
+                    <li>Mariam Dawood School of Visual Art & Design</li>
+                    <li>(RHSA) Razia Hassan School of Architecture</li>
+                    <li>School of Media and Mass Communication (SMC)</li>
+                    <li>School of Business</li>
+                    <li>Seeta Majeed School of Liberal Arts & Social Sciences</li>
+                    <li>School of Computer and Information Technology</li>
+                </ul>
+
+                <!-- Location and Transportation Section -->
+                <h2><i class="fa fa-map-marker"></i> Univeristy Location</h2>
+                <p><iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d109017.44670114755!2d74.216094!3d31.364629999999995!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391855549698f6f7%3A0x4ffb44644f967144!2sBeaconhouse%20National%20University!5e0!3m2!1sen!2sus!4v1682729551244!5m2!1sen!2sus"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+
+                <h2><i class="fa fa-map-marker"></i> Nearby Hostels</h2>
+                <h3 class="hostel">Residency Girls Hostel</h3>
+                <p><iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d109017.44670114755!2d74.216094!3d31.364629999999995!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391855549698f6f7%3A0x4ffb44644f967144!2sBeaconhouse%20National%20University!5e0!3m2!1sen!2sus!4v1682729551244!5m2!1sen!2sus"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+                <p>PRICE : 1044 (1 Person) 1566 (3 Person)</p>
+                <p>(NOTE: PRICES MAY VARY ACCORDING TO THE DATES KINDLY VISIT GIVEN LINKS AND CONTACT NUMBERS)</p>
+                <p>ADDRESS : House NO, Johar, 263 Chowk, near Allah Hu, Phase Block R1 Phase 2 Johar Town, Lahore,
+                    Punjab 54000,
+                    Pakistan</p>
+                <p>CONTACT NO : +92 317 4010099</p>
+
+                <h3 class="hostel">Shah Taj Hostel</h3>
+                <p><iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d109017.44670114755!2d74.216094!3d31.364629999999995!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391855549698f6f7%3A0x4ffb44644f967144!2sBeaconhouse%20National%20University!5e0!3m2!1sen!2sus!4v1682729551244!5m2!1sen!2sus"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+                <p>PRICE : 14,000 per month</p>
+                <p>(NOTE: PRICES MAY VARY ACCORDING TO THE DATES KINDLY VISIT GIVEN LINKS AND CONTACT NUMBERS)</p>
+                <p>ADDRESS : X8W9+VWX, Hafeez Kardar Rd, near Akbar Chowk, Faisal Town, Lahore, Punjab, Pakistan</p>
+                <p>CONTACT NO : +92 323 9406031</p>
+                <h3 class="hostel">Cavalry Hostel</h3>
+                <p><iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d109017.44670114755!2d74.216094!3d31.364629999999995!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391855549698f6f7%3A0x4ffb44644f967144!2sBeaconhouse%20National%20University!5e0!3m2!1sen!2sus!4v1682729551244!5m2!1sen!2sus"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+                <p>PRICE : 10,000 per month</p>
+                <p>(NOTE: PRICES MAY VARY ACCORDING TO THE DATES KINDLY VISIT GIVEN LINKS AND CONTACT NUMBERS)</p>
+                <p>ADDRESS : 3, Lahore, Pakistan</p>
+                <p>CONTACT NO : +92 311 1112847</p>
+                <h2><i class="fa fa-map-marker"></i> PUBLIC TRANSPORTATION</h2>
+                <h3 class="transport">Adda Plot Gol Chakkar</h3>
+                <p><iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27254.34888589142!2d74.19549396042949!3d31.364674108576292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919aaa646d2e0ed%3A0xb1acf27287544014!2sMirza%20Chowk!5e0!3m2!1sen!2sus!4v1682730248388!5m2!1sen!2sus"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+                <h3 class="transport">Mirza Chowk</h3>
+                <p><iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27254.34888589142!2d74.19549396042949!3d31.364674108576292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919aaa4266754cb%3A0x16416b5b1f7aeb3e!2sAdda%20Plot%20Gol%20Chakkar!5e0!3m2!1sen!2sus!4v1682730291964!5m2!1sen!2sus"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+                <h3 class="transport">STATION LOCATIONS</h3>
+                <p><iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27254.34888589142!2d74.19549396042949!3d31.364674108576292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919aaa646d2e0ed%3A0xb1acf27287544014!2sMirza%20Chowk!5e0!3m2!1sen!2sus!4v1682730248388!5m2!1sen!2sus"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+
+                <h2><i class="fa fa-trophy"></i> Ranking</h2>
+                <p class="ranking">Country Rank: 1024</p>
+                <div class="contact-info">
+                    <h2><i class="fa fa-phone"></i> Contact Info</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item"><i class="fa fa-envelope"></i> https://www.bnu.edu.pk/</li>
+                        <li class="list-group-item"><i class="fa fa-phone"></i> 042-38100156</li>
+                        <li class="list-group-item"><i class="fa fa-map-marker"></i> 13 Km Off Thokar Niazbeg, Raiwand
+                            Rd, Beacon
+                            House Society, Lahore, Punjab 53700, Pakistan</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="zone yellow text-color-footer">&copy; UNIVERSITY FINDER</footer>
+
+    <!-- Footer 
+    <footer class="zone">
+        <p>&copy; 2023 Beaconhouse National University. All rights reserved.</p>
+    </footer>-->
+
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3MD73ad2hAV0HRCm-qL27x8UGdGagNcw",
+            authDomain: "universityfinder-1a357.firebaseapp.com",
+            projectId: "universityfinder-1a357",
+            storageBucket: "universityfinder-1a357.appspot.com",
+            messagingSenderId: "372113601183",
+            appId: "1:372113601183:web:fd14e4a011cb27a06ca8aa",
+            measurementId: "G-8FF9NMSZLT"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Initialize Firestore
+        const db = firebase.firestore();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const docId = urlParams.get('docId');
+
+        console.log(docId);
+
+        db.collection('universities').doc(docId).get().then((doc) => {
+            if (doc.exists) {
+                console.log('Document data:', doc.data());
+            } else {
+                console.log('No such document!');
+            }
+        }).catch((error) => {
+            console.log('Error getting document:', error);
+        });
+    </script>
+
+</body>
+
+</html>

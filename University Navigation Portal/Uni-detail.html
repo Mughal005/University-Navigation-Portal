@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEC - TYPES</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fasthand&amp;family=Lobster&amp;display=swap" rel="stylesheet">
+    <style>
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid black;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            cursor: pointer;
+            color: #fff;
+            font-size: 2.3em;
+            border-radius: 4px;
+            border: 1px solid #bbb;
+            transition: all 0.3s linear;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px, inset rgba(0, 0, 0, 0.15) 0px -10px 20px;
+        }
+
+        .main-nav {
+            display: flex;
+            list-style: none;
+            font-size: 0.7em;
+            margin: 0;
+        }
+
+        .main-nav li {
+            padding: 20px;
+        }
+
+        .main-nav li a {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: black;
+        }
+
+        .main-nav li a:hover {
+            font-weight: bolder;
+            text-decoration: none;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #ccc;
+        }
+
+        footer {
+            background-color: rgb(30, 29, 29);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+            bottom: 0;
+            font-size: 25px;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        ul li {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .hostel,
+        .transport {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .contact-info {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .list-group-item {
+            background-color: #f9f9f9;
+            border: none;
+            padding: 10px;
+        }
+
+        .list-group-item i {
+            margin-right: 10px;
+        }
+
+        .logo-container img {
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.05);
+        }
+
+        @media screen and (max-width: 767px) {
+
+            h1,
+            h2 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+
+        .main-nav li a.active {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="loading" style="display: flex;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul class="main-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="HEC-TYPES.html" class="active">HEC Types</a></li>
+            <li><a href="AboutUs.html">About Us</a></li>
+            <li><a href="ContactUs.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <img id="logo" class="logo" alt="University Logo">
+                </div>
+                <h1 id="name">Loading...</h1>
+
+                <p id="history">​​​</p>
+
+                <!-- History Section -->
+                <h2><i class="fa fa-history"></i> History</h2>
+                <p id="established">Loading...</p>
+                <p id="recognition">Loading...</p>
+                <p id="control-type">Loading...</p>
+
+                <!-- Departments Section -->
+                <ul id="departments-list">
+                    <!-- Departments will be populated here -->
+                </ul>
+
+                <!-- Location and Transportation Section -->
+                <h2><i class="fa fa-map-marker"></i> University Location</h2>
+                <p id="location-uni"><!-- Map will be embedded here --></p>
+
+                <h2><i class="fa fa-map-marker"></i> Nearby Hostels</h2>
+                <div id="hostels"></div>
+
+                <h2><i class="fa fa-map-marker"></i> Public Transportation</h2>
+                <div id="transports"></div>
+
+                <h2><i class="fa fa-trophy"></i> Ranking</h2>
+                <p class="ranking" id="ranking">Loading...</p>
+
+                <!-- Contact Info Section -->
+                <div class="contact-info">
+                    <h2><i class="fa fa-phone"></i> Contact Info</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item"><i class="fa fa-envelope"></i> <a id="website-link" href="#"
+                                target="_blank"></a></li>
+                        <li class="list-group-item"><i class="fa fa-phone"></i> <span id="phone-number"></span></li>
+                        <li class="list-group-item"><i class="fa fa-map-marker"></i> <span id="address"></span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 <span id="university-name"></span>, All rights reserved.
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDkeOrHnDu05UGaqJ7TAluUF-M2XJsNa3w",
+            authDomain: "universitynavigationport-cf6a6.firebaseapp.com",
+            projectId: "universitynavigationport-cf6a6",
+            storageBucket: "universitynavigationport-cf6a6.appspot.com",
+            messagingSenderId: "724245839000",
+            appId: "1:724245839000:web:2e74b94417d8f3fac5a4ed"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Initialize Firestore
+        const db = firebase.firestore();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const docId = urlParams.get('docId');
+
+        console.log(docId);
+
+        db.collection('universities').doc(docId).get().then((doc) => {
+            if (doc.exists) {
+                console.log('Document data:', doc.data());
+                const data = doc.data();
+                document.getElementById('logo').src = data.iconURL;
+                document.getElementById('name').textContent = data.universityName;
+                document.getElementById('history').textContent = data.history;
+                const establishedElement = document.getElementById('established');
+                const strongElement = document.createElement('strong');
+                strongElement.textContent = 'Established: ';
+                establishedElement.textContent = '';
+                establishedElement.appendChild(strongElement);
+                establishedElement.appendChild(document.createTextNode(data.establishedDate));
+                const recognitionElement = document.getElementById('recognition');
+                const controlTypeElement = document.getElementById('control-type');
+                const recognitionStrong = document.createElement('strong');
+                recognitionStrong.textContent = 'Recognized by: ';
+                recognitionElement.textContent = '';
+                recognitionElement.appendChild(recognitionStrong);
+                recognitionElement.appendChild(document.createTextNode(data.recognized));
+                const controlTypeStrong = document.createElement('strong');
+                controlTypeStrong.textContent = 'Control Type: ';
+                controlTypeElement.textContent = '';
+                controlTypeElement.appendChild(controlTypeStrong);
+                controlTypeElement.appendChild(document.createTextNode(data.controlType));
+
+                document.getElementById('location-uni').innerHTML = data.location;
+                const hostelsContainer = document.getElementById('hostels');
+                const transportsContainer = document.getElementById('transports');
+                const rankingElement = document.getElementById('ranking');
+                const rankingStrong = document.createElement('strong');
+                rankingStrong.textContent = 'Country Rank: ';
+                rankingElement.textContent = '';
+                rankingElement.appendChild(rankingStrong);
+                rankingElement.appendChild(document.createTextNode(data.ranking));
+
+                document.getElementById('website-link').textContent = data.email;
+                document.getElementById('website-link').href = `mailto:${data.email}`;
+                document.getElementById('phone-number').textContent = data.phone;
+                document.getElementById('address').textContent = data.address;
+                const departmentsList = document.getElementById('departments-list');
+                document.getElementById('university-name').textContent = data.universityName;
+
+                data.hostels.forEach(hostel => {
+                    const hostelInfo = hostel.split(',');
+
+                    const name = hostelInfo[0];
+                    const price = hostelInfo[1];
+                    const address = hostelInfo[2];
+                    const contact = hostelInfo[3];
+                    const site = hostelInfo[4];
+                    const iframe = hostelInfo[5];
+
+                    const hostelDiv = document.createElement('div');
+                    hostelDiv.classList.add('hostel-item');
+                    hostelDiv.innerHTML = `
+                        <h3 class="hostel">${name}</h3>
+                        <div>${iframe}</div>
+                        <p><strong>Price:</strong> ${price}</p>
+                        <p><strong>Address:</strong> ${address}</p>
+                        <p><strong>Site:</strong> <a href="${site}" target="_blank">${site}</a></p>
+                        <p><strong>Contact:</strong> ${contact}</p>
+                    `;
+                    hostelsContainer.appendChild(hostelDiv);
+                });
+
+                data.transportations.forEach(transport => {
+                    const transportInfo = transport.split(',');
+
+                    const name = transportInfo[0];
+                    const iframe = transportInfo[1];
+
+                    const transportDiv = document.createElement('div');
+                    transportDiv.classList.add('transport-item');
+                    transportDiv.innerHTML = `
+                        <h3 class="transport">${name}</h3>
+                        <div>${iframe}</div>
+                    `;
+                    transportsContainer.appendChild(transportDiv);
+                });
+
+                data.departments.forEach(department => {
+                    const departmentItem = document.createElement('p');
+                    const departmentHeader = document.createElement('h2');
+                    const icon = document.createElement('i');
+                    icon.className = 'fa fa-graduation-cap';
+                    departmentHeader.appendChild(icon);
+                    departmentHeader.appendChild(document.createTextNode(` ${department.name}`));
+
+                    // Append the header to the department item
+                    departmentItem.appendChild(departmentHeader);
+
+                    if (department.subDepartments.length > 0) {
+                        const subDepartmentsList = document.createElement('ul');
+
+                        department.subDepartments.forEach(subDepartment => {
+                            const subDepartmentItem = document.createElement('li');
+                            subDepartmentItem.textContent = subDepartment;
+                            subDepartmentsList.appendChild(subDepartmentItem);
+                        });
+
+                        departmentItem.appendChild(subDepartmentsList);
+                    }
+
+                    departmentsList.appendChild(departmentItem);
+                });
+
+                setTimeout(function () {
+                    document.getElementById('loading').style.display = 'none';
+                }, 500);
+
+            } else {
+                console.log('No such document!');
+                document.getElementById('loading').style.display = 'none';
+            }
+        }).catch((error) => {
+            console.log('Error getting document:', error);
+            document.getElementById('loading').style.display = 'none';
+        });
+    </script>
+
+</body>
+
+</html>

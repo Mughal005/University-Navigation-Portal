@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit University Information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #1E90FF;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            padding-top: 50px;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #1E90FF;
+            font-weight: bold;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section h2 {
+            margin-top: 0;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        footer {
+            background-color: #1E90FF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .btn-primary {
+            background-color: #1E90FF;
+            border-color: #1E90FF;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .university-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .university-header img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .button {
+            margin-bottom: 100px;
+        }
+
+        .swal2-popup {
+            width: 600px !important;
+            font-size: 1.6rem !important;
+        }
+
+        .swal2-title {
+            font-size: 2rem !important;
+        }
+
+        .swal2-html-container {
+            font-size: 1.4rem !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="loading" style="display: flex;">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+        <div class="university-header">
+            <img src="https://via.placeholder.com/800x200" alt="University Image" id="universityImage">
+            <h1 id="universityNameTitle">University Information Form</h1>
+        </div>
+
+        <!-- Image Upload Section -->
+        <div class="form-section">
+            <h2>Upload University Image</h2>
+            <div class="form-group">
+                <label for="universityImageInput">University Image</label>
+                <input type="file" class="form-control" id="universityImageInput" accept="image/*"
+                    onchange="previewImage(event)">
+            </div>
+        </div>
+
+        <!-- University Icon Section -->
+        <div class="form-section">
+            <h2>Upload University Icon</h2>
+            <div class="form-group">
+                <label for="universityIconInput">University Icon</label>
+                <input type="file" class="form-control" id="universityIconInput" accept="image/*">
+            </div>
+        </div>
+
+        <!-- University Name Section -->
+        <div class="form-section">
+            <h2>University Name</h2>
+            <div class="form-group">
+                <label for="universityName">University Name</label>
+                <input type="text" class="form-control" id="universityName" placeholder="Enter University Name">
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="form-section">
+            <h2>History</h2>
+            <div class="form-group">
+                <label for="history">History</label>
+                <textarea class="form-control" id="history" rows="5" placeholder="Enter History"></textarea>
+            </div>
+        </div>
+
+        <!-- Establishment and Recognition Section -->
+        <div class="form-section">
+            <h2>Establishment and Recognition</h2>
+            <div class="form-group">
+                <label for="establishedDate">Established Date</label>
+                <input type="date" class="form-control" id="establishedDate">
+            </div>
+            <div class="form-group">
+                <label for="recognized">Recognized</label>
+                <input type="text" class="form-control" id="recognized" placeholder="Enter Recognized Body">
+            </div>
+            <div class="form-group">
+                <label for="controlType">Control Type</label>
+                <input type="text" class="form-control" id="controlType"
+                    placeholder="Enter Control Type (e.g., Private)">
+            </div>
+            <div class="form-group">
+                <label for="controlType">HEC Recognized</label>
+                <input type="text" class="form-control" id="HECType"
+                    placeholder="Enter HEC Recognized (e.g., Yes or No)">
+            </div>
+        </div>
+
+        <!-- Departments Section -->
+        <div class="form-section">
+            <h2>Departments</h2>
+            <div id="departmentsContainer">
+                <!-- Departments will be dynamically added here -->
+            </div>
+            <button type="button" class="btn btn-default" id="addDepartmentBtn">Add Department</button>
+        </div>
+
+        <!-- Location Section -->
+        <div class="form-section">
+            <h2>Location</h2>
+            <div class="form-group">
+                <label for="location">Location (iframe)</label>
+                <input type="text" class="form-control" id="location" placeholder="Enter Location">
+            </div>
+        </div>
+
+        <!-- Nearby Hostels Section -->
+        <div class="form-section">
+            <h2>Nearby Hostels</h2>
+            <div class="form-group">
+                <label for="hostel1">Hostel 1 (Name,Price,Address,Site,Contact,iframe)</label>
+                <input type="text" class="form-control" id="hostel1"
+                    placeholder="Enter Hostel Name, Price, Address, Site, Contact, Location">
+            </div>
+            <div class="form-group">
+                <label for="hostel2">Hostel 2 (Name,Price,Address,Site,Contact,iframe)</label>
+                <input type="text" class="form-control" id="hostel2"
+                    placeholder="Enter Hostel Name, Price, Address, Site, Contact, Location">
+            </div>
+            <div class="form-group">
+                <label for="hostel3">Hostel 3 (Name,Price,Address,Site,Contact,iframe)</label>
+                <input type="text" class="form-control" id="hostel3"
+                    placeholder="Enter Hostel Location, Name, Price, Address, Site, Contact, Location">
+            </div>
+        </div>
+
+        <!-- Public Transportation Section -->
+        <div class="form-section">
+            <h2>Public Transportation</h2>
+            <div class="form-group">
+                <label for="transportation1">Transportation 1</label>
+                <input type="text" class="form-control" id="transportation1"
+                    placeholder="Enter Transportation Name and Location">
+            </div>
+            <div class="form-group">
+                <label for="transportation2">Transportation 2</label>
+                <input type="text" class="form-control" id="transportation2"
+                    placeholder="Enter Transportation Name and Location">
+            </div>
+            <div class="form-group">
+                <label for="transportation3">Transportation 3</label>
+                <input type="text" class="form-control" id="transportation3"
+                    placeholder="Enter Transportation Name and Location">
+            </div>
+        </div>
+
+        <!-- Ranking Section -->
+        <div class="form-section">
+            <h2>Ranking</h2>
+            <div class="form-group">
+                <label for="ranking">Ranking</label>
+                <input type="text" class="form-control" id="ranking" placeholder="Enter Ranking">
+            </div>
+        </div>
+
+        <!-- Contact Info Section -->
+        <div class="form-section">
+            <h2>Contact Info</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter Email">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" class="form-control" id="phone" placeholder="Enter Phone Number">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="Enter Address">
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center button">
+            <button type="button" class="btn btn-primary btn-lg" onclick="updateUniversityData()">Update</button>
+            <button type="button" class="btn btn-danger btn-lg" onclick="deleteUniversityData()">Delete</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 University Navigation Portal, All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDkeOrHnDu05UGaqJ7TAluUF-M2XJsNa3w",
+            authDomain: "universitynavigationport-cf6a6.firebaseapp.com",
+            projectId: "universitynavigationport-cf6a6",
+            storageBucket: "universitynavigationport-cf6a6.appspot.com",
+            messagingSenderId: "724245839000",
+            appId: "1:724245839000:web:2e74b94417d8f3fac5a4ed"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        var firestore = firebase.firestore();
+        var auth = firebase.auth();
+        var db = firebase.firestore();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const docId = urlParams.get('docId');
+
+        // Function to fetch university data and populate the form
+        function fetchUniversityData(docId) {
+            db.collection('universities').doc(docId).get().then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    document.getElementById('universityNameTitle').textContent = data.universityName || '';
+                    document.getElementById('universityName').value = data.universityName || '';
+                    document.getElementById('history').value = data.history || '';
+                    document.getElementById('establishedDate').value = data.establishedDate || '';
+                    document.getElementById('recognized').value = data.recognized || '';
+                    document.getElementById('controlType').value = data.controlType || '';
+                    document.getElementById('HECType').value = data.hecType || '';
+                    document.getElementById('location').value = data.location || '';
+                    document.getElementById('hostel1').value = data.hostels[0] || '';
+                    document.getElementById('hostel2').value = data.hostels[1] || '';
+                    document.getElementById('hostel3').value = data.hostels[2] || '';
+                    document.getElementById('transportation1').value = data.transportations[0] || '';
+                    document.getElementById('transportation2').value = data.transportations[1] || '';
+                    document.getElementById('transportation3').value = data.transportations[2] || '';
+                    document.getElementById('ranking').value = data.ranking || '';
+                    document.getElementById('email').value = data.email || '';
+                    document.getElementById('phone').value = data.phone || '';
+                    document.getElementById('address').value = data.address || '';
+
+                    // Populate departments
+                    const departmentsContainer = document.getElementById('departmentsContainer');
+                    data.departments.forEach(department => {
+                        addDepartment(department.name, department.subDepartments);
+                    });
+
+                    if (data.imageUrl) {
+                        document.getElementById('universityImage').src = data.imageUrl;
+                    }
+                    setTimeout(function () {
+                        document.getElementById('loading').style.display = 'none';
+                    }, 1500);
+                } else {
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                document.getElementById('loading').style.display = 'none';
+                console.log("Error getting document:", error);
+                showAlertWithNav('There is some isse while loading University Data please retry!');
+            });
+        }
+
+        // Function to add a new department
+        document.getElementById('addDepartmentBtn').addEventListener('click', function () {
+            var departmentGroup = document.createElement('div');
+            departmentGroup.classList.add('department-group');
+            departmentGroup.innerHTML = `
+                <div class="form-group">
+                    <label>Department</label>
+                    <input type="text" class="form-control department-name" placeholder="Enter Department Name">
+                </div>
+                <div class="form-group sub-departments">
+                    <label>Sub-Departments</label>
+                    <input type="text" class="form-control sub-department-name" placeholder="Enter Sub-Department Name">
+                    <button type="button" class="btn btn-default add-sub-department-btn">Add Sub-Department</button>
+                </div>
+                <button type="button" class="btn btn-danger remove-department-btn">Remove Department</button>
+                <hr>
+            `;
+            document.getElementById('departmentsContainer').appendChild(departmentGroup);
+        });
+
+        // Event delegation for dynamically added sub-department and remove department buttons
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('add-sub-department-btn')) {
+                var subDepartmentInput = document.createElement('input');
+                subDepartmentInput.type = 'text';
+                subDepartmentInput.classList.add('form-control', 'sub-department-name');
+                subDepartmentInput.placeholder = 'Enter Sub-Department Name';
+                event.target.parentElement.insertBefore(subDepartmentInput, event.target);
+            }
+
+            if (event.target.classList.contains('remove-department-btn')) {
+                event.target.parentElement.remove();
+            }
+        });
+
+        // Add department to the form
+        function addDepartment(name = '', subDepartments = []) {
+            var departmentsContainer = document.getElementById('departmentsContainer');
+            var departmentGroup = document.createElement('div');
+            departmentGroup.className = 'department-group';
+
+            departmentGroup.innerHTML = `
+                <div class="form-group">
+                    <label>Department</label>
+                    <input type="text" class="form-control department-name" value="${name}" placeholder="Enter Department Name">
+                </div>
+                <div class="form-group sub-departments">
+                    <label>Sub-Departments</label>
+                    ${subDepartments.map(subDept => `<input type="text" class="form-control sub-department-name" value="${subDept}" placeholder="Enter Sub-Department Name">`).join('')}
+                    <button type="button" class="btn btn-default add-sub-department-btn">Add Sub-Department</button>
+                </div>
+                <button type="button" class="btn btn-danger remove-department-btn">Remove Department</button>
+                <hr>
+            `;
+
+            departmentsContainer.appendChild(departmentGroup);
+
+            // Attach event listeners to the new buttons
+            departmentGroup.querySelector('.add-sub-department-btn').addEventListener('click', function () {
+                addSubDepartmentButton(departmentGroup);
+            });
+
+            departmentGroup.querySelector('.remove-department-btn').addEventListener('click', function () {
+                departmentGroup.remove();
+            });
+        }
+
+        // Function to handle image preview
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('universityImage');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Function to add a new sub-department input
+        function addSubDepartmentButton(departmentGroup) {
+            var subDepartmentsDiv = departmentGroup.querySelector('.sub-departments');
+            var newSubDepartmentInput = document.createElement('input');
+            newSubDepartmentInput.type = 'text';
+            newSubDepartmentInput.className = 'form-control sub-department-name';
+            newSubDepartmentInput.placeholder = 'Enter Sub-Department Name';
+            subDepartmentsDiv.insertBefore(newSubDepartmentInput, subDepartmentsDiv.querySelector('.add-sub-department-btn'));
+        }
+
+        function updateUniversityData() {
+            const universityName = document.getElementById('universityName').value;
+            const history = document.getElementById('history').value;
+            const establishedDate = document.getElementById('establishedDate').value;
+            const recognized = document.getElementById('recognized').value;
+            const controlType = document.getElementById('controlType').value;
+            const hecType = document.getElementById('HECType').value;
+            const location = document.getElementById('location').value;
+            const hostel1 = document.getElementById('hostel1').value;
+            const hostel2 = document.getElementById('hostel2').value;
+            const hostel3 = document.getElementById('hostel3').value;
+            const transportation1 = document.getElementById('transportation1').value;
+            const transportation2 = document.getElementById('transportation2').value;
+            const transportation3 = document.getElementById('transportation3').value;
+            const ranking = document.getElementById('ranking').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const imageFile = document.getElementById('universityImageInput').files[0];
+            const iconFile = document.getElementById('universityIconInput').files[0];
+
+            const departments = Array.from(document.getElementsByClassName('department-group')).map(departmentGroup => {
+                const departmentName = departmentGroup.querySelector('.department-name').value;
+                const subDepartments = Array.from(departmentGroup.querySelectorAll('.sub-department-name')).map(input => input.value);
+                return { name: departmentName, subDepartments };
+            });
+
+            // Validate required fields
+            if (!universityName || !history || !establishedDate || !recognized || !controlType || !hecType || !location ||
+                !hostel1 || !hostel2 || !hostel3 || !transportation1 || !transportation2 || !transportation3 ||
+                !ranking || !email || !phone || !address) {
+
+                showAlert("Please fill in all required fields.");
+                return;
+            }
+
+            let imageUrl = null;
+            let iconUrl = null;
+
+            // Check if university image file is selected
+            if (imageFile) {
+                // Upload university image file
+                const storageRef = firebase.storage().ref();
+                const imageRef = storageRef.child(`university_images/${imageFile.name}`);
+                const uploadImageTask = imageRef.put(imageFile);
+
+                uploadImageTask.on('state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log(`Image upload is ${progress}% done`);
+                    },
+                    (error) => {
+                        console.error("Error uploading image: ", error);
+                    },
+                    () => {
+                        uploadImageTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                            console.log('Image available at', downloadURL);
+                            imageUrl = downloadURL;
+
+                            // Check if university icon file is also selected
+                            if (iconFile) {
+                                // Upload university icon file
+                                const iconRef = storageRef.child(`university_icons/${iconFile.name}`);
+                                const uploadIconTask = iconRef.put(iconFile);
+
+                                uploadIconTask.on('state_changed',
+                                    (snapshot) => {
+                                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                        console.log(`Icon upload is ${progress}% done`);
+                                    },
+                                    (error) => {
+                                        console.error("Error uploading icon: ", error);
+                                    },
+                                    () => {
+                                        uploadIconTask.snapshot.ref.getDownloadURL().then((iconDownloadURL) => {
+                                            console.log('Icon available at', iconDownloadURL);
+                                            iconUrl = iconDownloadURL;
+
+                                            // After uploading both icon and image, save university data
+                                            saveUniversityData(docId, {
+                                                universityName,
+                                                history,
+                                                establishedDate,
+                                                recognized,
+                                                controlType,
+                                                hecType,
+                                                location,
+                                                hostels: [hostel1, hostel2, hostel3],
+                                                transportations: [transportation1, transportation2, transportation3],
+                                                ranking,
+                                                contact: { email, phone, address },
+                                                imageUrl,
+                                                iconUrl,
+                                                departments
+                                            });
+                                        });
+                                    }
+                                );
+                            } else {
+                                // If no icon file is selected, save university data with only image URL
+                                saveUniversityData(docId, {
+                                    universityName,
+                                    history,
+                                    establishedDate,
+                                    recognized,
+                                    controlType,
+                                    hecType,
+                                    location,
+                                    hostels: [hostel1, hostel2, hostel3],
+                                    transportations: [transportation1, transportation2, transportation3],
+                                    ranking,
+                                    contact: { email, phone, address },
+                                    imageUrl,
+                                    departments
+                                });
+                            }
+                        });
+                    }
+                );
+            } else {
+                // If no image file is selected, check if university icon file is selected
+                if (iconFile) {
+                    // Upload university icon file
+                    const storageRef = firebase.storage().ref();
+                    const iconRef = storageRef.child(`university_icons/${iconFile.name}`);
+                    const uploadIconTask = iconRef.put(iconFile);
+
+                    uploadIconTask.on('state_changed',
+                        (snapshot) => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            console.log(`Icon upload is ${progress}% done`);
+                        },
+                        (error) => {
+                            console.error("Error uploading icon: ", error);
+                        },
+                        () => {
+                            uploadIconTask.snapshot.ref.getDownloadURL().then((iconDownloadURL) => {
+                                console.log('Icon available at', iconDownloadURL);
+                                iconUrl = iconDownloadURL;
+
+                                // After uploading icon, save university data with only icon URL
+                                saveUniversityData(docId, {
+                                    universityName,
+                                    history,
+                                    establishedDate,
+                                    recognized,
+                                    controlType,
+                                    hecType,
+                                    location,
+                                    hostels: [hostel1, hostel2, hostel3],
+                                    transportations: [transportation1, transportation2, transportation3],
+                                    ranking,
+                                    contact: { email, phone, address },
+                                    iconUrl,
+                                    departments
+                                });
+                            });
+                        }
+                    );
+                } else {
+                    // If no image or icon file is selected, save university data without URLs
+                    saveUniversityData(docId, {
+                        universityName,
+                        history,
+                        establishedDate,
+                        recognized,
+                        controlType,
+                        hecType,
+                        location,
+                        hostels: [hostel1, hostel2, hostel3],
+                        transportations: [transportation1, transportation2, transportation3],
+                        ranking,
+                        contact: { email, phone, address },
+                        departments
+                    });
+                }
+            }
+        }
+
+
+        // Function to save or update university data
+        function saveUniversityData(docId, data) {
+            db.collection('universities').doc(docId).update(data)
+                .then(() => {
+                    console.log("Document successfully updated!");
+                    showAlertWithNav('University data updated successfully!');
+                })
+                .catch((error) => {
+                    console.error("Error updating document: ", error);
+                    showAlertWithNav('Error updating university data.');
+                });
+        }
+
+        // Function to delete university data
+        function deleteUniversityData() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    db.collection('universities').doc(docId).delete().then(() => {
+                        console.log("Document successfully deleted!");
+                        Swal.fire(
+                            'Deleted!',
+                            'University data has been deleted.',
+                            'success'
+                        ).then(() => {
+                            window.location.replace('home.html');
+                        });
+                    }).catch((error) => {
+                        console.error("Error removing document: ", error);
+                        Swal.fire(
+                            'Error!',
+                            'Error deleting university data.',
+                            'error'
+                        );
+                    });
+                }
+            });
+        }
+
+
+        // Fetch university data on page load
+        window.onload = function () {
+            if (docId) {
+                fetchUniversityData(docId);
+            }
+        }
+
+        function showAlertWithNav(text) {
+            Swal.fire({
+                title: text,
+                showClass: {
+                    popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+                },
+                hideClass: {
+                    popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+                },
+                confirmButtonColor: '#1E90FF',
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    htmlContainer: 'swal2-html-container'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.replace('home.html');
+                }
+            });
+        }
+
+        function showAlert(text) {
+            Swal.fire({
+                title: text,
+                showClass: {
+                    popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+                },
+                hideClass: {
+                    popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+                },
+                confirmButtonColor: '#1E90FF',
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    htmlContainer: 'swal2-html-container'
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
